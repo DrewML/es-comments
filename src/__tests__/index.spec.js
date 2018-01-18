@@ -1,4 +1,11 @@
 const esCommentsParser = require('..');
+const { join } = require('path');
+const { readFileSync } = require('fs');
+
+const jQuery = readFileSync(
+    join(__dirname, '../../bench/fixtures/jquery-1.7.2.js'),
+    'utf8'
+);
 
 test('Parses single-line comment when source-file is only one line', () => {
     const [comment] = esCommentsParser('// foo');
@@ -66,4 +73,9 @@ test('Parses as 1 comment when multi-line comment is used within single-line com
         someOtherCode();
     `);
     expect(comment.value).toBe('// foo /* bar */ test/');
+});
+
+test('Parses comments in jQuery source without exploding', () => {
+    const comments = esCommentsParser(jQuery);
+    expect(comments.length).toBe(1222);
 });

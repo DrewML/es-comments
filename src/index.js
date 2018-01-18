@@ -31,6 +31,8 @@ class ESCommentsParser {
             this.parseSingleLineComment();
         } else if (next === '*') {
             this.parseMultilineComment();
+        } else {
+            this.next();
         }
 
         return this.isDone ? this : this.parse();

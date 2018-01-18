@@ -1,6 +1,6 @@
 # es-comments
 
-Parses a list of comments from an ECMAScript (JavaScript) source file.
+Parses a list of comments from an ECMAScript (JavaScript) source file. 0 dependencies, 417 bytes minified + gzipped.
 
 ## Install
 
@@ -27,3 +27,17 @@ const comments = parseESComments(someSourceCode);
     ]
 */
 ```
+
+## Benchmarks
+
+Benchmarks run on a mid-2015 MacBook Pro. Benchmarks compare running time to other similar npm packages.
+
+```sh
++--------------+----------------------------+------------------+---------------+---------------+
+|              │ es-comments (this package) │ extract-comments │ get-comments  │ comment-regex |
++--------------+----------------------------+------------------+---------------+---------------+
+| jQuery 1.7.2 │ 56.74 ops/sec              │ 9.52 ops/sec     │ 25.04 ops/sec │ 1,781 ops/sec |
++--------------+----------------------------+------------------+---------------+---------------+
+```
+
+tl;dr: If location information is not necessary, and some [misses](https://github.com/sindresorhus/comment-regex/issues/1) are ok, use a RegExp. Otherwise, this package is a good alternative.

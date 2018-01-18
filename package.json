@@ -7,6 +7,7 @@
     "src"
   ],
   "scripts": {
+    "bench": "node bench",
     "test": "run-p jest:ci prettier:check",
     "jest:ci": "jest -i",
     "test:dev": "jest --watch",
@@ -34,6 +35,10 @@
   },
   "homepage": "https://github.com/DrewML/es-comments#readme",
   "devDependencies": {
+    "benchtable": "^0.1.0",
+    "comment-regex": "^1.0.0",
+    "extract-comments": "^0.10.1",
+    "get-comments": "^1.0.1",
     "jest": "^22.1.2",
     "npm-run-all": "^4.1.2",
     "prettier": "^1.10.2",
