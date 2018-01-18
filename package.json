@@ -1,0 +1,42 @@
+{
+  "name": "es-comments",
+  "version": "1.0.0",
+  "description": "Parses single and multiline comments from an ECMAScript source file",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "run-p jest:ci prettier:check",
+    "jest:ci": "jest -i",
+    "test:dev": "jest --watch",
+    "prettier": "prettier --write 'src/**/*.js'",
+    "prettier:check": "prettier-check 'src/**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrewML/es-comments.git"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "keywords": [
+    "ecmascript",
+    "javascript",
+    "comments",
+    "parse",
+    "parser"
+  ],
+  "author": "Andrew Levine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DrewML/es-comments/issues"
+  },
+  "homepage": "https://github.com/DrewML/es-comments#readme",
+  "devDependencies": {
+    "jest": "^22.1.2",
+    "npm-run-all": "^4.1.2",
+    "prettier": "^1.10.2",
+    "prettier-check": "^2.0.0"
+  }
+}
