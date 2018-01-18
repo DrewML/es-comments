@@ -1,6 +1,6 @@
 {
   "name": "es-comments",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parses single and multiline comments from an ECMAScript source file",
   "main": "src/index.js",
   "files": [
