@@ -99,3 +99,24 @@ test('Does not parse single line comments within string literals with double quo
     const comments = esCommentsParser(`foo("// foo"); `);
     expect(comments.length).toBe(0);
 });
+
+test('Reported location is correct for single-line comment', () => {
+    const str = `
+        // single line comment
+        foo();
+    `;
+    const [comment] = esCommentsParser(str);
+    expect(comment.value).toBe(str.substring(comment.start, comment.end));
+});
+
+test('Reported location is correct for multi-line comment', () => {
+    const str = `
+       /*
+           foo
+         bizz
+       */
+      foo();
+    `;
+    const [comment] = esCommentsParser(str);
+    expect(comment.value).toBe(str.substring(comment.start, comment.end));
+});

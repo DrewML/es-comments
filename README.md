@@ -1,6 +1,6 @@
 # es-comments
 
-Parses a list of comments from an ECMAScript (JavaScript) source file. 0 dependencies, 417 bytes minified + gzipped.
+Parses a list of comments from an ECMAScript (JavaScript) source file. 0 dependencies, 482 bytes minified + gzipped.
 
 ## Install
 
