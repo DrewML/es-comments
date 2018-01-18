@@ -77,5 +77,25 @@ test('Parses as 1 comment when multi-line comment is used within single-line com
 
 test('Parses comments in jQuery source without exploding', () => {
     const comments = esCommentsParser(jQuery);
-    expect(comments.length).toBe(1222);
+    expect(comments.length).toBe(1153);
+});
+
+test('Does not parse multiline comments within string literals with single quote', () => {
+    const comments = esCommentsParser(`foo('/* do not parse me */'); `);
+    expect(comments.length).toBe(0);
+});
+
+test('Does not parse multiline comments within string literals with double quote', () => {
+    const comments = esCommentsParser(`foo("/* do not parse me */"); `);
+    expect(comments.length).toBe(0);
+});
+
+test('Does not parse single line comments within string literals with single quote', () => {
+    const comments = esCommentsParser(`foo('// foo'); `);
+    expect(comments.length).toBe(0);
+});
+
+test('Does not parse single line comments within string literals with double quote', () => {
+    const comments = esCommentsParser(`foo("// foo"); `);
+    expect(comments.length).toBe(0);
 });

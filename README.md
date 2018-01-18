@@ -36,7 +36,7 @@ Benchmarks run on a mid-2015 MacBook Pro. Benchmarks compare running time to oth
 +--------------+----------------------------+------------------+---------------+---------------+
 |              │ es-comments (this package) │ extract-comments │ get-comments  │ comment-regex |
 +--------------+----------------------------+------------------+---------------+---------------+
-| jQuery 1.7.2 │ 56.74 ops/sec              │ 9.52 ops/sec     │ 25.04 ops/sec │ 1,781 ops/sec |
+| jQuery 1.7.2 │ 49.36 ops/sec              │ 9.27 ops/sec     │ 22.05 ops/sec │ 1,474 ops/sec |
 +--------------+----------------------------+------------------+---------------+---------------+
 ```
 

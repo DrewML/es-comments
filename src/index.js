@@ -5,11 +5,11 @@ class ESCommentsParser {
         this.comments = [];
     }
 
-    get isDone() {
+    isDone() {
         return this.position > this.input.length;
     }
 
-    get currentChar() {
+    currentChar() {
         return this.input[this.position];
     }
 
@@ -21,29 +21,54 @@ class ESCommentsParser {
         this.position = this.position + moveForwardBy;
     }
 
-    parse() {
-        while (!this.isDone && this.currentChar !== '/') this.next();
-        // Exhausted the file, didn't find a comment
-        if (this.isDone) return this;
+    moveToEndOfString() {
+        const quoteChar = this.currentChar();
+        this.next();
 
-        const next = this.input[this.position + 1];
-        if (next === '/') {
-            this.parseSingleLineComment();
-        } else if (next === '*') {
-            this.parseMultilineComment();
-        } else {
+        while (true) {
+            if (this.isDone()) break;
+            if (this.currentChar() === quoteChar && this.prior() !== '\\') {
+                this.next();
+                break;
+            }
             this.next();
         }
+    }
 
-        return this.isDone ? this : this.parse();
+    parse() {
+        while (true) {
+            if (this.isDone()) break;
+
+            const currentChar = this.currentChar();
+            if (currentChar === '"' || currentChar === "'") {
+                this.moveToEndOfString();
+                continue;
+            }
+
+            if (currentChar !== '/') {
+                this.next();
+                continue;
+            }
+
+            const next = this.input[this.position + 1];
+            if (next === '/') {
+                this.parseSingleLineComment();
+            } else if (next === '*') {
+                this.parseMultilineComment();
+            } else {
+                this.next();
+            }
+        }
+
+        return this.isDone() ? this : this.parse();
     }
 
     parseSingleLineComment() {
         const buf = [];
         const { position: start } = this;
 
-        while (!this.isDone && !/\n/.test(this.currentChar)) {
-            buf.push(this.currentChar);
+        while (!this.isDone() && !/\n/.test(this.currentChar())) {
+            buf.push(this.currentChar());
             this.next();
         }
 
@@ -61,9 +86,9 @@ class ESCommentsParser {
         this.next(2);
 
         while (true) {
-            if (this.isDone) break;
+            if (this.isDone()) break;
 
-            const { currentChar } = this;
+            const currentChar = this.currentChar();
             const atCommentEnd = currentChar === '/' && this.prior() === '*';
 
             buf.push(currentChar);
